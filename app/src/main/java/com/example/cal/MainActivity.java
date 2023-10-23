@@ -2,12 +2,14 @@ package com.example.cal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Home");
 
         num1 = (EditText)findViewById(R.id.editTextNumberSigned);
         num2 = (EditText)findViewById(R.id.editTextNumberSigned2);
@@ -38,9 +41,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e)
                 {
-                    answer.setText("Something went wrong.");
+                    Toast.makeText(MainActivity.this, "Something Went Wrong.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public void onNewActivity(View v)
+    {
+        // launch new Page
+        Intent i = new Intent(this, SettingsActivity.class);
+        i.putExtra("COOL", "Hello");
+        startActivity(i);
     }
 }
